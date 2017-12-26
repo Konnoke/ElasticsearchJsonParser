@@ -11,34 +11,36 @@ import org.codehaus.jackson.map.ObjectMapper;
  * @author kbaik
  */
 public class Cluster {
-    HashMap<String, List<String>> cluster;
-    ArrayList<Integer> presentInCluster;
-    int clusterNum;
-    List<String> currentCluster;
+    private String clusterNumber;
+    private List<String> clusterGroup;
+
     
-    public Cluster(){
-        this.cluster = new HashMap<>();
-        presentInCluster = new ArrayList<>();
-        clusterNum = cluster.size();
+    /**
+     * @return the ClusterNumber
+     */
+    public String getclusterNumber() {
+        return this.clusterNumber;
+    }
+
+    /**
+     * @param ClusterNumber the ClusterNumber to set
+     */
+    public void setclusterNumber(String clusterNumber) {
+        this.clusterNumber = clusterNumber;
+    }
+
+    /**
+     * @return the clusterGroup
+     */
+    public List<String> getclusterGroup() {
+        return this.clusterGroup;
+    }
+
+    /**
+     * @param clusterGroup the clusterGroup to set
+     */
+    public void setclusterGroup(List<String> clusterGroup) {
+        this.clusterGroup = clusterGroup;
     }
     
-    public boolean isPresent(String ID){
-        for(int i = 0; i < clusterNum; i++){
-            currentCluster = cluster.get(i);
-            if(currentCluster.contains(ID)){
-                presentInCluster.add(i);
-            }
-        }
-        
-        if(presentInCluster.isEmpty()){
-            return false;
-        }else{
-            return false;
-        }
-    }
-    
-    public ArrayList<Integer> clusterPresent(){
-        System.out.println("Present in Cluster: "+ presentInCluster);
-        return presentInCluster;
-    }
 }

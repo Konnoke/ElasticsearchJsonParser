@@ -3,6 +3,7 @@ package elasticsearchjsonparser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.xml.crypto.Data;
 
 /**
  *
@@ -15,24 +16,25 @@ public class DataEntry {
     private String _score;
     private String id; //source id
     private int clusterID;
-
-    public void setIndex(String _index){
+    private _source _source;
+    
+    public void set_index(String _index){
         this._index = _index;
     }
 
-    public void setType(String type){
-        this._type = type;
+    public void set_type(String _type){
+        this._type = _type;
     }
 
     public void setClusterID(int clusterID){
         this.clusterID = clusterID;
     }
 
-    public String getIndex(){
+    public String get_index(){
         return this._index;
     }
 
-    public String getType(){
+    public String get_type(){
         return this._type;
     }
 
@@ -43,26 +45,47 @@ public class DataEntry {
     /**
      * @return the _score
      */
-    public String getScore() {
+    public String get_score() {
         return _score;
     }
 
     /**
      * @param _score the _score to set
      */
-    public void setScore(String _score) {
+    public void set_score(String _score) {
         this._score = _score;
     }
     
-    public void setID(String id){
-        this.id = id;
+    public void set_id(String id){
+        this._id = id;
     }
 
     /**
      * @return the sourceID
      */
-    public String getID() {
-        return this.id;
+    public String get_id() {
+        return this._id;
     }
 
+    public void setid(String id){
+        this.id = id;
+    }
+    
+    public String getid(){
+        return this.id;
+    }
+    
+    /**
+     * @return the _source
+     */
+    public _source get_source() {
+        return _source;
+    }
+
+    /**
+     * @param _source the _source to set
+     */
+    public void set_source(_source _source) {
+        this._source = _source;
+    }
 }

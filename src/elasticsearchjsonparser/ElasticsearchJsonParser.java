@@ -1,6 +1,8 @@
 package elasticsearchjsonparser;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.URL;
@@ -40,22 +42,28 @@ public class ElasticsearchJsonParser {
 
                     
         //TypeReference<HashMap<String, Object>> typeRef = new TypeReference<HashMap<String, Object>>() {};
+        List<DataEntry> dataEntryObjects = objectMapper.readValue(dataFile, new TypeReference<List<DataEntry>>(){});
+        List<Cluster> clusterObjects = objectMapper.readValue(dataFile, new TypeReference<List<Cluster>>(){});
 
         //HashMap<String, Object> o = objectMapper.readValue(dataFile, typeRef);
 
         //DataEntry dataEntry = objectMapper.readValue(dataFile, DataEntry.class);
         //Cluster cluster = objectMapper.readValue(clusterFile, Cluster.class);
 
-        //String prettyData = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dataEntry);
-        //System.out.println(o);
+        String prettyData = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dataEntryObjects);
+        String prettyCluster = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(clusterObjects);
+        System.out.println(prettyData);
         //cluster.clusterPresent();
+        //System.out.println(prettyCluster);
+        //parseJSON(jParser);
         
-        parseJSON(jParser);
+        
+        
     }
 
     private static void parseJSON(JsonParser jsonParser)
             throws JsonParseException, IOException {
-
+        String currentID;
         try {
             //JsonFactory jfactory = new JsonFactory();
             //JsonParser jParser = jfactory.createJsonParser(new File("/home/HQ/kbaik/NetBeansProjects/ElasticsearchJsonParser/src/data/ldc_uyghur_3.json"));
@@ -78,6 +86,7 @@ public class ElasticsearchJsonParser {
                 
                 if("id".equals(fieldname)){
                     jsonParser.nextToken();
+                    currentID = jsonParser.getText();
                     System.out.println(jsonParser.getText());
                 }
 
