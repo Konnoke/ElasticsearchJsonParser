@@ -13,7 +13,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class Cluster {
     private String clusterNumber;
     private List<String> clusterGroup;
-
+    private List<String> clusterPresentIn;
     
     /**
      * @return the ClusterNumber
@@ -41,6 +41,14 @@ public class Cluster {
      */
     public void setclusterGroup(List<String> clusterGroup) {
         this.clusterGroup = clusterGroup;
+    }
+    
+    public List<String> getClusterPresentIn(String id){
+        if(this.clusterGroup.contains(id)){
+            this.clusterPresentIn.add(this.clusterNumber);
+        }
+        
+        return this.clusterPresentIn;
     }
     
 }

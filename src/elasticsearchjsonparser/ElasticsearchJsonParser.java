@@ -43,7 +43,7 @@ public class ElasticsearchJsonParser {
                     
         //TypeReference<HashMap<String, Object>> typeRef = new TypeReference<HashMap<String, Object>>() {};
         List<DataEntry> dataEntryObjects = objectMapper.readValue(dataFile, new TypeReference<List<DataEntry>>(){});
-        List<Cluster> clusterObjects = objectMapper.readValue(dataFile, new TypeReference<List<Cluster>>(){});
+        List<Cluster> clusterObjects = objectMapper.readValue(clusterFile, new TypeReference<List<Cluster>>(){});
 
         //HashMap<String, Object> o = objectMapper.readValue(dataFile, typeRef);
 
@@ -52,11 +52,12 @@ public class ElasticsearchJsonParser {
 
         String prettyData = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dataEntryObjects);
         String prettyCluster = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(clusterObjects);
-        System.out.println(prettyData);
+        //System.out.println(prettyData);
+        System.out.println(prettyCluster);
         //cluster.clusterPresent();
         //System.out.println(prettyCluster);
         //parseJSON(jParser);
-        
+         
         
         
     }
