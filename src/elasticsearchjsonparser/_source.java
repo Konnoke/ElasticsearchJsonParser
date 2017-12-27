@@ -6,6 +6,7 @@
 package elasticsearchjsonparser;
 
 import java.util.List;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
@@ -18,7 +19,7 @@ public class _source {
     private String language;
     private String id;
     private String sentimentString;
-    private List<String> LOC;
+    private String[] LOC;
     private List<String> GPE;
     private List<String> PER;
     private List<String> ORG;
@@ -26,20 +27,23 @@ public class _source {
     /**
      * @return the LOC
      */
-    public List<String> getLOC() {
+    @JsonProperty("LOC")
+    public String[] getLOC() {
         return this.LOC;
     }
 
     /**
      * @param LOC the LOC to set
      */
-    public void setLOC(List<String> LOC) {
+    @JsonProperty("LOC")
+    public void setLOC(String[] LOC) {
         this.LOC = LOC;
     }
 
     /**
      * @return the GPE
      */
+    @JsonProperty("GPE")
     public List<String> getGPE() {
         return this.GPE;
     }
@@ -47,13 +51,15 @@ public class _source {
     /**
      * @param GPE the GPE to set
      */
-    public void setGPE(List<String>GPE) {
+    @JsonProperty("GPE")
+    public void setGPE(List<String> GPE) {
         this.GPE = GPE;
     }
 
     /**
      * @return the PER
      */
+    @JsonProperty("PER")
     public List<String> getPER() {
         return this.PER;
     }
@@ -61,6 +67,7 @@ public class _source {
     /**
      * @param PER the PER to set
      */
+    @JsonProperty("PER")
     public void setPER(List<String> PER) {
         this.PER = PER;
     }
@@ -68,6 +75,7 @@ public class _source {
     /**
      * @return the ORG
      */
+    @JsonProperty("ORG")
     public List<String> getORG() {
         return this.ORG;
     }
@@ -75,7 +83,8 @@ public class _source {
     /**
      * @param ORG the ORG to set
      */
-    public void setORG(List<String>ORG) {
+    @JsonProperty("ORG")
+    public void setORG(List<String> ORG) {
         this.ORG = ORG;
     }
 

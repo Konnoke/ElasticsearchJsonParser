@@ -128,10 +128,13 @@ public class ElasticsearchJsonParser {
         int clusterLength = clusterList.size();
         for(int i = 0; i < dataEntryLength; i++){
             for(int j = 0; j < clusterLength; j++){
-                dataEntryList.get(i).setClusterPresent( 
-                        clusterList.get(j).getClusterPresentIn(dataEntryList.get(i)._source.getId()));
+                //dataEntryList.get(i).setClusterPresent( 
+                //        clusterList.get(j).getClusterPresentIn(dataEntryList.get(i)._source.getId()));
                 //System.out.println(dataEntryList.get(i)._source.getId());
-
+                if(clusterList.get(j).isPresent(dataEntryList.get(i)._source.getId())){
+                    dataEntryList.get(i).addClusterPresent(clusterList.get(j).getclusterNumber());
+                }
+                //System.out.println("i, j :"+i+j+clusterList.get(j).isPresent(dataEntryList.get(i)._source.getId()));
             }
         }
         
@@ -140,8 +143,7 @@ public class ElasticsearchJsonParser {
 
     private static void toJson(List<DataEntry> dataEntryList) {
         ObjectMapper mapper = new ObjectMapper();
-        mapper.setSerializationConfig(mapper.getSerializationConfig().withSerializationInclusion(
-            JsonSerialize.Inclusion.NON_EMPTY));
+        mapper.setSerializationConfig(mapper.getSerializationConfig().withSerializationInclusion(JsonSerialize.Inclusion.NON_EMPTY));
         try {
             //Convert object to JSON string and save into file directly
             mapper.writeValue(new File("ldc_uyghur_clustering.json"), dataEntryList);

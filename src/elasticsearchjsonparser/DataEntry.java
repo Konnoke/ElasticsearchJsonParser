@@ -14,7 +14,7 @@ public class DataEntry {
     private String _type; //= "ui_output";
     private String _id;
     private String _score;
-    private int clusterID;
+    //private int clusterID;
     public _source _source;
     public List<String> clusterPresent;
     
@@ -25,11 +25,11 @@ public class DataEntry {
     public void set_type(String _type){
         this._type = _type;
     }
-
+/*
     public void setClusterID(int clusterID){
         this.clusterID = clusterID;
     }
-
+*/
     public String get_index(){
         return this._index;
     }
@@ -37,10 +37,10 @@ public class DataEntry {
     public String get_type(){
         return this._type;
     }
-
+/*
     public int getClusterID(){
         return this.clusterID;
-    }
+    }*/
     
     /**
      * @return the _score
@@ -92,6 +92,13 @@ public class DataEntry {
      */
     public void setClusterPresent(List<String> clusterPresent) {
         this.clusterPresent = clusterPresent;
+    }
+    
+    public void addClusterPresent(String clusterPresent){
+        if(this.clusterPresent == null){
+            this.clusterPresent = new ArrayList<>();
+        }
+        this.clusterPresent.add(clusterPresent);
     }
     
 }

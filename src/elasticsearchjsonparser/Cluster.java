@@ -43,9 +43,17 @@ public class Cluster {
         this.clusterGroup = clusterGroup;
     }
     
+    public boolean isPresent(String id){
+        if(this.clusterGroup.contains(id)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     public List<String> getClusterPresentIn(String id){
         if(this.clusterPresentIn == null){
-            this.clusterPresentIn = new ArrayList<String>();
+            this.clusterPresentIn = new ArrayList<>();
             //System.out.println("sdauf");
         }
         if(this.clusterGroup.contains(id) && !this.clusterPresentIn.contains(id)){
