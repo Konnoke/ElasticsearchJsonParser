@@ -44,7 +44,11 @@ public class Cluster {
     }
     
     public List<String> getClusterPresentIn(String id){
-        if(this.clusterGroup.contains(id)){
+        if(this.clusterPresentIn == null){
+            this.clusterPresentIn = new ArrayList<String>();
+            //System.out.println("sdauf");
+        }
+        if(this.clusterGroup.contains(id) && !this.clusterPresentIn.contains(id)){
             this.clusterPresentIn.add(this.clusterNumber);
         }
         

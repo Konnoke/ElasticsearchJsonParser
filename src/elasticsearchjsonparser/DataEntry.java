@@ -14,9 +14,9 @@ public class DataEntry {
     private String _type; //= "ui_output";
     private String _id;
     private String _score;
-    private String id; //source id
     private int clusterID;
-    private _source _source;
+    public _source _source;
+    public List<String> clusterPresent;
     
     public void set_index(String _index){
         this._index = _index;
@@ -66,14 +66,6 @@ public class DataEntry {
     public String get_id() {
         return this._id;
     }
-
-    public void setid(String id){
-        this.id = id;
-    }
-    
-    public String getid(){
-        return this.id;
-    }
     
     /**
      * @return the _source
@@ -88,4 +80,18 @@ public class DataEntry {
     public void set_source(_source _source) {
         this._source = _source;
     }
+    /**
+     * @return the clusterPresent
+     */
+    public List<String> getClusterPresent() {
+        return clusterPresent;
+    }
+
+    /**
+     * @param clusterPresent the clusterPresent to set
+     */
+    public void setClusterPresent(List<String> clusterPresent) {
+        this.clusterPresent = clusterPresent;
+    }
+    
 }
