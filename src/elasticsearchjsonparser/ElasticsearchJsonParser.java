@@ -30,16 +30,17 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author KBAI
  */
 public class ElasticsearchJsonParser {
+
     public static void main(String[] args) throws JsonParseException, IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        File clusterFile = new File("/home/HQ/kbaik/NetBeansProjects/ElasticsearchJsonParser/src/data/LDC_clustering.json");
-        File dataFile = new File("/home/HQ/kbaik/NetBeansProjects/ElasticsearchJsonParser/src/data/ldc_uyghur_3.json");
+        File clusterFile = new File("src/data/LDC_clustering.json");
+        File dataFile = new File("src/data/ldc_uyghur_3.json");
 
         JsonFactory jfactory = new JsonFactory();
         JsonParser jParser = jfactory.createJsonParser(
-                new File("/home/HQ/kbaik/NetBeansProjects/ElasticsearchJsonParser/src/data/ldc_uyghur_3.json"));
+                new File("src/data/ldc_uyghur_3.json"));
 
         //TypeReference<HashMap<String, Object>> typeRef = new TypeReference<HashMap<String, Object>>() {};
         List<DataEntry> dataEntryObjects = objectMapper.readValue(dataFile, new TypeReference<List<DataEntry>>() {
@@ -91,53 +92,32 @@ public class ElasticsearchJsonParser {
                     System.out.println(jsonParser.getText());
                 }
 
-                if ("sadfsadf".equals(fieldname)) {
-
-                    jsonParser.nextToken(); // current token is "[", move next
-
-                    // messages is array, loop until token equal to "]"
-                    while (jsonParser.nextToken() != JsonToken.END_ARRAY) {
-
-                        // display msg1, msg2, msg3
-                        System.out.println(jsonParser.getText());
-
-                    }
-
-                }
-
             }
             jsonParser.close();
 
-        } catch (JsonGenerationException e) {
-
+        } catch (JsonGenerationException | JsonMappingException e) {
             e.printStackTrace();
-
-        } catch (JsonMappingException e) {
-
-            e.printStackTrace();
-
         } catch (IOException e) {
-
             e.printStackTrace();
-
         }
     }
-    
-    private static List<DataEntry> getCluster(List<DataEntry> dataEntryList, List<Cluster> clusterList){
+
+    private static List<DataEntry> getCluster(List<DataEntry> dataEntryList, List<Cluster> clusterList) {
         int dataEntryLength = dataEntryList.size();
         int clusterLength = clusterList.size();
-        for(int i = 0; i < dataEntryLength; i++){
-            for(int j = 0; j < clusterLength; j++){
+        for (int i = 0; i < dataEntryLength; i++) {
+            for (int j = 0; j < clusterLength; j++) {
                 //dataEntryList.get(i).setClusterPresent( 
                 //        clusterList.get(j).getClusterPresentIn(dataEntryList.get(i)._source.getId()));
                 //System.out.println(dataEntryList.get(i)._source.getId());
-                if(clusterList.get(j).isPresent(dataEntryList.get(i)._source.getId())){
+                if (clusterList.get(j).isPresent(dataEntryList.get(i)._source.getId())) {
                     dataEntryList.get(i).addClusterPresent(clusterList.get(j).getclusterNumber());
                 }
+                dataEntryList.get(i).setClusterPresent(dataEntryList.get(i).clusterPresent);
                 //System.out.println("i, j :"+i+j+clusterList.get(j).isPresent(dataEntryList.get(i)._source.getId()));
             }
         }
-        
+
         return dataEntryList;
     }
 
@@ -147,7 +127,7 @@ public class ElasticsearchJsonParser {
         try {
             //Convert object to JSON string and save into file directly
             mapper.writeValue(new File("ldc_uyghur_clustering.json"), dataEntryList);
-            
+
             //Convert object to JSON string
             String jsonInString = mapper.writeValueAsString(dataEntryList);
             System.out.println(jsonInString);

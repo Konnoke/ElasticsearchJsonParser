@@ -5,6 +5,7 @@
  */
 package elasticsearchjsonparser;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -24,6 +25,7 @@ public class _source {
     private List<String> PER;
     private List<String> ORG;
     private List<geoLocations> geoLocations;
+    private List<String> cluster;
     /**
      * @return the LOC
      */
@@ -184,6 +186,29 @@ public class _source {
      */
     public void setSentimentString(String sentimentString) {
         this.sentimentString = sentimentString;
+    }
+    
+    /**
+     * @return the cluster
+     */
+    public List<String> getCluster() {
+        return cluster;
+    }
+
+    /**
+     * @param cluster the cluster to set
+     */
+    public void setCluster(List<String> cluster) {
+        this.cluster = cluster;
+    }
+    
+    public void addCluster(List<String> clusterPresent){
+        if(this.cluster == null){
+            this.cluster = new ArrayList<>();
+        }
+        for(int i = 0; i < clusterPresent.size();i++){
+            this.cluster.add(clusterPresent.get(i));
+        }
     }
     
 }

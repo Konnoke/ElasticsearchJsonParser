@@ -91,7 +91,7 @@ public class DataEntry {
      * @param clusterPresent the clusterPresent to set
      */
     public void setClusterPresent(List<String> clusterPresent) {
-        this.clusterPresent = clusterPresent;
+        this._source.setCluster(clusterPresent);
     }
     
     public void addClusterPresent(String clusterPresent){

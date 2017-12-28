@@ -1,0 +1,8 @@
+ 
+
+/build
+/nbproject
+
+#Output data
+/ldc_uyghur_clustering.json
+
