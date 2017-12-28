@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.xml.crypto.Data;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -16,6 +17,7 @@ public class DataEntry {
     private String _score;
     //private int clusterID;
     public _source _source;
+    @JsonIgnore
     public List<String> clusterPresent;
     
     public void set_index(String _index){
