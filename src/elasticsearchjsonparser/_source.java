@@ -24,8 +24,11 @@ public class _source {
     private List<String> GPE;
     private List<String> PER;
     private List<String> ORG;
+    private List<String> topics;
     private List<geoLocations> geoLocations;
     private List<String> cluster;
+    private double Xcoordinate;
+    private double Ycoordinate;
     /**
      * @return the LOC
      */
@@ -88,6 +91,22 @@ public class _source {
     @JsonProperty("ORG")
     public void setORG(List<String> ORG) {
         this.ORG = ORG;
+    }
+    
+    /**
+     * @return the topics
+     */
+    @JsonProperty("topics")
+    public List<String> getTopics() {
+        return topics;
+    }
+
+    /**
+     * @param topics the topics to set
+     */
+    @JsonProperty("topics")
+    public void setTopics(List<String> topics) {
+        this.topics = topics;
     }
 
     /**
@@ -202,6 +221,39 @@ public class _source {
         this.cluster = cluster;
     }
     
+    
+    /**
+     * @return the Xcoordinate
+     */
+    @JsonProperty("Xcoordinate")
+    public double getXcoordinate() {
+        return Xcoordinate;
+    }
+
+    /**
+     * @param Xcoordinate the Xcoordinate to set
+     */
+     @JsonProperty("Xcoordinate")
+    public void setXcoordinate(double Xcoordinate) {
+        this.Xcoordinate = Xcoordinate;
+    }
+
+    /**
+     * @return the Ycoordinate
+     */
+     @JsonProperty("Ycoordinate")
+    public double getYcoordinate() {
+        return Ycoordinate;
+    }
+
+    /**
+     * @param Ycoordinate the Ycoordinate to set
+     */
+     @JsonProperty("Ycoordinate")
+    public void setYcoordinate(double Ycoordinate) {
+        this.Ycoordinate = Ycoordinate;
+    }
+    
     public void addCluster(List<String> clusterPresent){
         if(this.cluster == null){
             this.cluster = new ArrayList<>();
@@ -218,28 +270,28 @@ class geoLocations{
     /**
      * @return the lat
      */
-    public String getlat() {
+    public Double getlat() {
         return this.lat;
     }
 
     /**
      * @param lat the lat to set
      */
-    public void setlat(String lat) {
+    public void setlat(Double lat) {
         this.lat = lat;
     }
 
     /**
      * @return the lon
      */
-    public String getlon() {
+    public Double getlon() {
         return this.lon;
     }
 
     /**
      * @param lon the lon to set
      */
-    public void setlon(String lon) {
+    public void setlon(Double lon) {
         this.lon = lon;
     }
 
@@ -257,8 +309,8 @@ class geoLocations{
         this.geohash = geohash;
     }
     
-    private String lat;
-    private String lon;
+    private Double lat;
+    private Double lon;
     private String geohash;
     
 }

@@ -1,5 +1,6 @@
 package elasticsearchjsonparser;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -24,6 +25,8 @@ import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.core.util.MinimalPrettyPrinter;
+import org.codehaus.jackson.util.DefaultPrettyPrinter.Lf2SpacesIndenter;
 
 /**
  *
@@ -36,7 +39,7 @@ public class ElasticsearchJsonParser {
         objectMapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         File clusterFile = new File("src/data/LDC_clustering.json");
-        File dataFile = new File("src/data/ldc_uyghur_3.json");
+        File dataFile = new File("src/data/ldc_uyghur_4.json");
 
         JsonFactory jfactory = new JsonFactory();
         JsonParser jParser = jfactory.createJsonParser(
@@ -123,18 +126,23 @@ public class ElasticsearchJsonParser {
 
     private static void toJson(List<DataEntry> dataEntryList) {
         ObjectMapper mapper = new ObjectMapper();
+        DefaultPrettyPrinter printer = new DefaultPrettyPrinter();
+        printer.withRootSeparator("\n");
         mapper.setSerializationConfig(mapper.getSerializationConfig().withSerializationInclusion(JsonSerialize.Inclusion.NON_EMPTY));
         try {
             //Convert object to JSON string and save into file directly
-            mapper.writeValue(new File("ldc_uyghur_clustering.json"), dataEntryList);
+            //mapper.writeValue(new File("ldc_uyghur_clustering.json"), dataEntryList);
 
             //Convert object to JSON string
             String jsonInString = mapper.writeValueAsString(dataEntryList);
-            System.out.println(jsonInString);
+            //System.out.println(jsonInString);
 
             //Convert object to JSON string and pretty print
-            jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(dataEntryList);
-            System.out.println(jsonInString);
+            jsonInString = mapper.writeValueAsString(dataEntryList);
+            //System.out.println(jsonInString);
+            //mapper.writeValue(new File("ldc_uyghur_clustering.json"), jsonInString);
+            mapper.writeValue(new File("ldc_uyghur_clustering.json"), dataEntryList);
+
 
         } catch (JsonGenerationException e) {
             e.printStackTrace();
